@@ -5,7 +5,7 @@
 1. [Abstract](#abstract)  
 2. [Data] (#data)
   
-### Abstract
+## Abstract
 
 There’s long been a simmering belief that basketball’s traditional positional labels
 (point guard, shooting guard, small forward, power forward, center) are insufficient in
