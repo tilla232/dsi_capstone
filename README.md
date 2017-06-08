@@ -3,7 +3,7 @@
 
 ## Table of Contents  
 1. [Abstract](#abstract)  
-2. [Data] (#data)  
+2. [Data](#data)  
 
   
 ## Abstract
