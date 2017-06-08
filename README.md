@@ -3,7 +3,8 @@
 
 ## Table of Contents  
 1. [Abstract](#abstract)  
-2. [Data] (#data)
+2. [Data] (#data)  
+
   
 ## Abstract
 
@@ -23,8 +24,9 @@ is problematic, to say the least.
 My aim in this study is two-fold: the first section is concerned with defining better
 positions, while the second will use these positions to determine if there is an ideal
 distribution of player-types on a team.
-
-### Data
+  
+  
+## Data
   
 Data was culled from a variety of sources - [Basketball Reference](http://basketball-reference.com) was immensely helpful to get started, as I was able to easily get 2016-17 advanced stats for players who met a set of criteria, to wit: at least 50 games played on the season, and at least 10 minutes played per game.  Basketball Reference has a handy 'Get Table as CSV' option which made using this data a snap: 
 ![basketball reference](https://github.com/tilla232/dsi_capstone/blob/master/img/Screen%20Shot%202017-06-08%20at%2011.51.07%20AM.png?raw=true)  
