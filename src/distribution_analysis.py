@@ -35,7 +35,7 @@ forest = ens.RandomForestRegressor(n_estimators=1000)
 
 # This yielded wildly variant R-squared scores, including a few negative!  Tough to tease out a pattern with such scant data, but let's carry on...
 
-adaboost = ens.AdaBoostRegressor(base_estimator=DecisionTreeRegressor(),n_estimators=1000,learning_rate=.5,loss='square')
+adaboost = ens.AdaBoostRegressor(base_estimator=DecisionTreeRegressor(),n_estimators=10000,learning_rate=.5,loss='square')
 adaboost.fit(X_train,y_train)
 print "Feature Importances: {}".format(zip(range(0,13),adaboost.feature_importances_))
 print "R-squared Score: {}".format(adaboost.score(X_test,y_test))
