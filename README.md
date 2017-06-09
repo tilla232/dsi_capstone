@@ -43,7 +43,9 @@ Clustering is a messy matter to begin with, and was only further complicated, in
 
 I was initially using roughly 20 features to cluster upon, and decided some dimensionality reduction could help improve my model's performance.  After some tinkering, I quickly realized that a dramatic dimension in reduction (n_components = 2) was drastically boosting my silhouette scores, but producing a set of clusters where some made perfect sense, but others were hard to explain, from a basketball standpoint.   
 ![cluster snippet](https://github.com/tilla232/dsi_capstone/blob/master/img/cluster_snippet.png?raw=true)  
-
+  
+ 
+I suspected that such intense dimension reduction was making my clustering model cluster based on overall contribution - in a sense, the PCA was effectively calculating an overall performance metric (stats like VORP, WS, BPM, etc.) on the fly; this was decidedly *not* what I was trying to accomplish.  
   
 ~~Nevertheless, I was at least able to use silhouette score on a simple K-Means algorithm to choose a suitable number of clusters at k = 13 - shout out to Mr. Alagappan - and a manual inspection of the clusters confirmed that I was on the right track.  One cluster - which I would call 'play-making big men' - contained players like Marc Gasol, Nikola Jokic, Giannis Antetokounmpo, and DeMarcus Cousins.  While these players do have some marked differences from one to the next (Gasol and Jokic, for example, could be considered insanely *un*athletic next to the other two), they definitely occupy the same milieu on the court: their team's offenses tend to run through them, and they are notably great passers for their size.  Another cluster, 'true centers', contains players like Bismack Biyombo, Dwight Howard, Hassan Whiteside, and Rudy Gobert.  These are players who have a huge defensive impact both in rim protection and rebounding, and not much of an offensive game outside of 6 feet from the basket.  ~~
 
