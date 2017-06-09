@@ -35,7 +35,7 @@ distribution of player-types on a team.
 Data was pulled from [Basketball Reference](http://basketball-reference.com) - the site has a handy 'Get Table as CSV' option which made pulling/using this data a snap: 
 ![basketball reference](https://github.com/tilla232/dsi_capstone/blob/master/img/bbref.png?raw=true)  
 
-As you can see, the site makes it incredibly easy to pull common stats for every player in a given season, but it also makes equally as easy to find the more advanced stats - those that lend a bit more insight into how a player actually spends his time on the floor.
+The site makes it incredibly easy not only to pull common counting stats for every player in a given season, but also to find the more advanced stats - those that lend a bit more insight into how a player actually spends his time on the floor.
    
 ## Model  
 ### Clustering
