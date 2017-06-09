@@ -41,7 +41,7 @@ The site makes it incredibly easy not only to pull common counting stats for eve
 ### Clustering
 Clustering is a messy matter to begin with, and was only further complicated, in this study, by the cluster overlap we would almost inherently find, regardless of model selection and parameter tuning.  Our model is built around NBA players, almost none of whom are abjectly *terrible* at any one aspect of the game.  We would expect players from cluster 1 to be at least serviceable when it comes to the skills that players from cluster 2 thrive at, etc.  This fact alone made it hard to quantify success in our clustering, as we would almost expect something like mean silhouette score to have a fairly low cap. 
 
-I was initially using roughly 20 features to cluster upon, and decided some dimensionality reduction could help improve my model's performance.  After some tinkering, I quickly realized that a dramatic dimension in reduction (n_components = 2) was drastically boosting my silhouette scores, but producing a set of clusters where some made perfect sense, but others were hard to explain, from a basketball standpoint.   
+I was initially using roughly 20 features to cluster upon, and decided some dimensionality reduction could help improve my model's performance.  After some tinkering with sklearn's PCA class, I quickly realized that a dramatic reduction in dimension (n_components = 2) was drastically boosting my silhouette scores, but producing a set of clusters where some made perfect sense, but others were...hard to explain, from a basketball standpoint.   
 ![cluster snippet](https://github.com/tilla232/dsi_capstone/blob/master/img/cluster_snippet.png?raw=true)  
   
  
