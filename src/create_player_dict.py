@@ -10,13 +10,26 @@ def get_bbref(year):
     year = XXXX integer
     stats = list of stats you wish to cluster on, must be stats that are column names in the CSV
     '''
-    bbref = pd.read_csv('../data/{}bbref_advanced.csv'.format(year))
+    bbref = pd.read_csv('../data/{}bbref.csv'.format(year))
+
+    bbref_advanced = pd.read_csv('../data/{}bbref_advanced.csv'.format(year))
 
     # the format of this table, taken directly from basketball-reference.com, is a little annoying: the 'Player' column features a player's name, followed by his abbreviation that the site uses as a URL endpoint.  We don't need this bit, so this line strips it, and does a little additional cleaning
 
     bbref['Player'] = bbref['Player'].apply(lambda x: x.split('\\',1)[0].translate(None,string.punctuation.replace('-','').replace("'",'')).replace(' Jr','').replace('Jr.','').replace("III",'').strip())
 
     bbref.set_index('Player',inplace=True)
+
+    # same cleaning process on advanced data
+    bbref_advanced['Player'] = bbref_advanced['Player'].apply(lambda x: x.split('\\',1)[0].translate(None,string.punctuation.replace('-','').replace("'",'')).replace(' Jr','').replace('Jr.','').replace("III",'').strip())
+
+    bbref_advanced.set_index('Player',inplace=True)
+
+    # merge the datasets
+    bbref = bbref.merge(bbref_advanced,how='outer',left_index=True,right_index=True)
+
+    # drop extraneous columns
+    bbref.drop(['Rk_x', 'Rk_y','Season_y','Age_y','Tm_y','Lg_y','G_y','MP_y','TS%_y','GS_y','MP.1_y'], axis=1, inplace=True)
     return bbref
 
 # There are a few (extremely annoying) exceptions to the naming conventions on NBA.com.  bbref is very good about standardizing this, NBA is decidedly not....this section will fix these exceptions, this first line is an example of how to easily do this
