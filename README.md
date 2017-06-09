@@ -6,6 +6,7 @@
 2. [Data](#data)  
 3. [Model](#model)
     * [Clustering](#clustering)
+    * [Regression](#regression)
     
 
   
@@ -43,4 +44,9 @@ Clustering is a messy matter to begin with, and was only further complicated, in
 Nevertheless, I was at least able to use silhouette score on a simple K-Means algorithm to choose a suitable number of clusters at k = 13 - shout out to Mr. Alagappan - and a manual inspection of the clusters confirmed that I was on the right track.  One cluster - which I would call 'play-making big men' - contained players like Marc Gasol, Nikola Jokic, Giannis Antetokounmpo, and DeMarcus Cousins.  While these players do have some marked differences from one to the next (Gasol and Jokic, for example, could be considered insanely *un*athletic next to the other two), they definitely occupy the same milieu on the court: their team's offenses tend to run through them, and they are notably great passers for their size.  Another cluster, 'true centers', contains players like Bismack Biyombo, Dwight Howard, Hassan Whiteside, and Rudy Gobert.  These are players who have a huge defensive impact both in rim protection and rebounding, and not much of an offensive game outside of 6 feet from the basket.  
 
 While these clusters made sense to me, I wanted to quantify them *somehow*, for the sake of both science as well as sanity-checking...I obtained simple numerical data (mean and range) for each feature, for each cluster - this also proved useful in *qualifying* each cluster, as it becamse immediately apparent what skills each cluster exemplified.
+
+### Regression
+My first attempt at regression was a simple Random Forest model - I knew my data was both sparse and scant, so I set the number of trees to 1000 - as computation time definitely wouldn't be a limiting factor - in hopes of increasing the efficacy of the model.  Running the model a few times quickly revealed that a simple regression model like this would be totally fruitless.  Not only were R-squared results all over the place, but a number of them actually came up negative.  This was my first real hiccup, but it was somewhat anticipated.  
+
+My plan to remedy this is to transform data from the previous 3 seasons with my same clustering model (ie, use the same model to label each player), and simply add the resulting player-type distributions on top of the 2016 data, and the total wins on top of the 2016 wins.  This method obviously carries the pretty major assumption that players from each of the last 3 seasons readily fit into the categories I defined with the 2016 data.  As a fan, I can readily justify this by simply noting that the game hasn't changed dramatically in the last 4 seasons...as a data scientist, I need to at least quantify this assertion *a little*.  
 
