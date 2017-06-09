@@ -51,7 +51,7 @@ I suspected that such intense dimension reduction was making my clustering model
 ~~While these clusters made sense to me, I wanted to quantify them *somehow*, for the sake of both science as well as sanity-checking...I obtained simple numerical data (mean and range) for each feature, for each cluster - this also proved useful in *qualifying* each cluster, as it becamse immediately apparent what skills each cluster exemplified.~~
 
 ### Regression
-My first attempt at regression was a simple Random Forest model - I knew my data was both sparse and scant, so I set the number of trees to 1000 - as computation time definitely wouldn't be a limiting factor - in hopes of increasing the efficacy of the model.  Running the model a few times quickly revealed that a simple regression model like this would be totally fruitless.  Not only were R-squared results all over the place, but a number of them actually came up negative.  This was my first real hiccup, but it was somewhat anticipated.   
+My first attempt at regression was a simple Random Forest model - I knew my data was both sparse and scant, so I set the number of trees to 1000 - as computation time definitely wouldn't be a limiting factor - in hopes of increasing the efficacy of the model.  Running the model a few times quickly revealed that a simple regression model like this would be totally fruitless.  Not only were R-squared results all over the place, but a number of them actually came up negative -- this was somewhat anticipated:
 ![distribution snippet](https://github.com/tilla232/dsi_capstone/blob/master/img/team_dists.png?raw=true)   
 If you try to regress on data like this...you're gonna have a bad time!
 
