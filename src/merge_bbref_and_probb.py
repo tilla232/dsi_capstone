@@ -16,6 +16,7 @@ if __name__ == '__main__':
     df2015 = merge(2015)
     df2014 = merge(2014)
 
-    df2016.to_csv('../data/2016stats.csv')
-    df2015.to_csv('../data/2015stats.csv')
-    df2014.to_csv('../data/2014stats.csv')
+    # fix Quincy Acy stats when you want to cluster
+    # df2016.to_csv('../data/2016stats.csv')
+    # df2015.to_csv('../data/2015stats.csv')
+    # df2014.to_csv('../data/2014stats.csv')
