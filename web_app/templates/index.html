@@ -18,7 +18,7 @@
     <link href="../static/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../static/css/jumbotron.css" rel="stylesheet">
+    <link href="../static/navbar-static-top.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -31,9 +31,10 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body style="font-family:'Courier';background-color:#1D2731">
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top" style="background-color:#0B3C5D">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -42,58 +43,37 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand">Redefining Positions in Today's NBA</a>
-          <a class="navbar-brand">|</a>
-          <a class="navbar-brand" href="/about">About</a>
+          <a class="navbar-brand" style="color:white"><b>Love and Basketball</b></a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <!-- <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form> -->
-        </div><!--/.navbar-collapse -->
+        <div id="navbar" class="navbar-collapse collapse" style="background-color:#328CC1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a style="color:#D9B310" href="#">Home</a></li>
+            <li><a style="color:#D9B310" href="/motivation">Motivation</a></li>
+            <li><a style="color:#D9B310" href="/model">Model</a></li>
+            <li><a style="color:#D9B310" href="/conclusion">Conclusions</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a style="color:white" href="/about">About</a></li>
+            <li><a style="color:#D9B310">|</a></li>
+            <li><a style="color:white" href="/contact">Contact </a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
       </div>
     </nav>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1 style="color:#a8775a;">Love and Basketball</h1>
-        <p style="color:#996746">a modern paradigm for analyzing the game</p>
-        <p><a class="btn btn-primary btn-lg" href="/positions" role="button" target="_blank">The Positions of Today &raquo;</a></p>
-      </div>
-    </div>
 
     <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Motivation</h2>
-          <p></p>
-          <p><a class="btn btn-default" href="/motivation" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Model</h2>
-          <p>An in-depth look at clustering, regression, and other methods utilized.
-          <p><a class="btn btn-default" href="/model" role="button">View details &raquo;</a></p>
-       </div>
-       <div class="col-md-4">
-         <h2>Team Needs</h2>
-         <p>A look at team needs in the upcoming free agency.</p>
-         <p><a class="btn btn-default" href="/teamneeds" role="button">View details &raquo;</a></p>
-       </div>
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Navbar example</h1>
+        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+        <p>To see the difference between static and fixed top navbars, just scroll.</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="/positions" role="button">Get Straight to It: View My Player Positions &raquo;</a>
+        </p>
       </div>
 
-      <hr>
-
-      <footer>
-        <p>&copy; 2017 RealEvents, Inc.</p>
-      </footer>
     </div> <!-- /container -->
 
 
@@ -101,9 +81,9 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../static/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../static/js/bootstrap.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../static/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>

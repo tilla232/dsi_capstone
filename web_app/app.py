@@ -24,6 +24,10 @@ def about():
 def problem():
     return render_template('model.html')
 
+@app.route('/conclusions')
+def conclusions():
+    return render_template('conclusions.html')
+
 @app.route('/teamneeds', methods=['GET','POST'])
 def score():
     return render_template('score_prompt.html', predicted=y)
@@ -31,3 +35,5 @@ def score():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
+
+# <img src="../static/img/GitHub-Mark-32px.png" alt="github">

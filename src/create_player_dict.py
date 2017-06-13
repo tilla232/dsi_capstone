@@ -16,12 +16,12 @@ def get_bbref(year):
 
     # the format of this table, taken directly from basketball-reference.com, is a little annoying: the 'Player' column features a player's name, followed by his abbreviation that the site uses as a URL endpoint.  We don't need this bit, so this line strips it, and does a little additional cleaning
 
-    bbref['Player'] = bbref['Player'].apply(lambda x: x.split('\\',1)[0].translate(None,string.punctuation.replace('-','').replace("'",'')).replace(' Jr','').replace('Jr.','').replace("III",'').strip())
+    bbref['Player'] = bbref['Player'].apply(lambda x: x.split('\\',1)[0].translate(None,string.punctuation.replace("'",'')).replace(' Jr','').replace('Jr.','').replace("III",'').strip())
 
     bbref.set_index('Player',inplace=True)
 
     # same cleaning process on advanced data
-    bbref_advanced['Player'] = bbref_advanced['Player'].apply(lambda x: x.split('\\',1)[0].translate(None,string.punctuation.replace('-','').replace("'",'')).replace(' Jr','').replace('Jr.','').replace("III",'').strip())
+    bbref_advanced['Player'] = bbref_advanced['Player'].apply(lambda x: x.split('\\',1)[0].translate(None,string.punctuation.replace("'",'')).replace(' Jr','').replace('Jr.','').replace("III",'').strip())
 
     bbref_advanced.set_index('Player',inplace=True)
 
