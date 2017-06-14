@@ -12,3 +12,24 @@ figure img {
 figure figcaption {
     text-align: center;
 }
+h1.custom {
+  text-align: center;
+}
+p.custom {
+  font-family: 'Helvetica';
+  font-size: 8;
+}
+p.right {
+  text-align: right;
+}
+div.left {
+  clear: left;
+}
+div.right {
+  clear: right;
+}
+img.right {
+  float: right;
+  padding:1px;
+  border:1px solid #328CC1;
+}
