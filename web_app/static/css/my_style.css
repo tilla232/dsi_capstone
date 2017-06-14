@@ -1,0 +1,14 @@
+p.im {
+  text-align: center;
+}
+figure {
+    display: inline-block;
+    text-align: center;
+}
+figure img {
+    vertical-align: top;
+    text-align: center;
+}
+figure figcaption {
+    text-align: center;
+}

@@ -8,8 +8,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-
+    <style>
+    img.center {display: block;
+    margin: 0 auto;}
+    figure figcaption {text-align: center;}
+    </style>
     <title>Love and Basketball</title>
+
+    <!-- my style changes -->
+    <link href="../static/css/my_style.css" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
@@ -48,9 +55,9 @@
         <div id="navbar" class="navbar-collapse collapse" style="background-color:#328CC1">
           <ul class="nav navbar-nav">
             <li class="active"><a style="color:#D9B310" href="/">Home</a></li>
-            <li><a style="color:#D9B310" href="/motivation">Motivation</a></li>
+            <li><a style="color:#D9B310" href="#">Motivation</a></li>
             <li><a style="color:#D9B310" href="/model">Model</a></li>
-            <li><a style="color:#D9B310" href="/conclusion">Conclusions</a></li>
+            <li><a style="color:#D9B310" href="/conclusions">Conclusions</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a style="color:white" href="/about">About</a></li>
@@ -66,11 +73,34 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
         <p>
           <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View Player Positions &raquo;</a>
+        </p>
+        <hr>
+        <p>
+          At the 2012 Sloan Sports Analytics Conference, Muthu Alagappan famously posited that there are 13 NBA positions, as opposed to the traditional 5.
+        </p>
+        <p class="im">
+         <img src="../static/img/template.png">
+       </p>
+         <p>
+          His presentation certainly wasn't without merit, but its findings fell short in a number of ways.  The New York Times <a href="https://offthedribble.blogs.nytimes.com/2012/03/06/trading-small-forward-for-scoring-rebounder/?_r=0" target="_blank">elaborated on a couple of these issues at the time.
+          </a>
+          </p>
+          <figure>
+            <img src="../static/img/vague_positions.png" style="align">
+            <figcaption>Some positions aren't adequately descriptive </figcaption>
+          </figure>
+          <hr>
+          <figure>
+            <img src="../static/img/imbalance.png" style="align">
+            <figcaption>Notable Imbalance among Positions </figcaption>
+          </figure>
+          <hr>
+          <p>In spite of these reservations regarding his conclusions, I immediately saw the value in Alagappan's project, and in attacking the problem he had set forth to solve.
+            <br><br>
+          My goal in this project was in two parts:<br>&nbsp;a) Redefine the NBA positions using feature extraction, dimension reduction, and clustering methods<br>&nbsp;b) Extract pattern(s) by regressing on player-type distributions, in an attempt to find some sort of 'winning formula'.
+          </a>
         </p>
       </div>
 
