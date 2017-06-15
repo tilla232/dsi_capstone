@@ -50,9 +50,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse" style="background-color:#328CC1">
           <ul class="nav navbar-nav">
-            <li class="active"><a style="color:#D9B310" href="/">Home</a></li>
+            <li><a style="color:#D9B310" href="/">Home</a></li>
             <li><a style="color:#D9B310" href="/motivation">Motivation</a></li>
-            <li><a style="color:#D9B310" href="#">Model</a></li>
+            <li class="active"><a style="color:#D9B310" href="#">Model</a></li>
             <li><a style="color:#D9B310" href="/conclusions">Conclusions</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -78,15 +78,30 @@
                 <img class="right" src="../static/img/bbrefsquare.png"/>
                 <div class="left">
                   <p class="custom">
-                    Most data was pulled from <a href="https://basketball-reference.com" target="_blank">Basketball Reference</a>, using the site's player season-finder tool.  In hopes of reducing noise, I limited my search to players who played at least 50 games, and at least 10 minutes per game.
+                    Most data was pulled from <a href="https://basketball-reference.com" target="_blank">Basketball Reference</a>, using the site's player season-finder tool.  In hopes of reducing noise, I limited my search to players who played at least 50 games, and at least 10 minutes per game, for each of the last 3 seasons.  I was hesitant to go back any further than 3 seasons, as the purpose of my study was to capture the state of the game as it exists <i>right now</i>, and the game has changed plenty in the last 5 years, let alone the last 10 or 15.  sollicitudin semper aliquet.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lobortis ullamcorper tortor in interdum. In bibendum euismod ligula, ut tincidunt orci venenatis eget. Aenean commodo ultricies lacus, non molestie tellus pulvinar at. Vivamus fringilla elit quam, eu rutrum ex finibus non. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean tristique dolor sed tellus vehicula, ac consectetur lorem laoreet. Suspendisse potenti. Pellentesque varius fringilla metus, at ultricies purus cursus et. Integer pellentesque mi rhoncus, mattis quam ac, maximus risus. Praesent sed arcu metus. Fusce sollicitudin semper aliquet.
+                    <hr>
                   </p>
                 </div>
         </div>
-
-   <div>
+        <div class="clear">
+          <hr>
+                <img class="right" src="../static/img/probb.png"/>
+                <div class="left">
+                  <p class="custom">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lobortis ullamcorper tortor in interdum. In bibendum euismod ligula, ut tincidunt orci venenatis eget. Aenean commodo ultricies lacus, non molestie tellus pulvinar at. Vivamus fringilla elit quam, eu rutrum ex finibus non. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean tristique dolor sed tellus vehicula, ac consectetur lorem laoreet. Suspendisse potenti. Pellentesque varius fringilla metus, at ultricies purus cursus et. Integer pellentesque mi rhoncus, mattis quam ac, maximus risus. Praesent sed arcu metus. Fusce sollicitudin semper aliquet.
+                  </p>
+                </div>
+        </div>
         <h1 class="custom"><b><i>Clustering</i></b></h1>
-        <p class="custom">This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-    </div>
+        <div>
+                <img class="left" src="../static/img/2dtsne.png"/>
+                <div class="right">
+                  <p class="custom">
+                    t-distributed Stochastic Neighbor Embedding is a powerful manifold learning technique for visualizing higher-dimensional datasets via data embedding.  The goal here is to quickly, visually assess whether a feature space can be readily clustered, or whether, as seen here, the data seems to be evenly and randomly distributed.  This was my baseline effort, run on every feature in my dataset - I figured some feature selection was in order, and this hammered it home.  It's hard to discern any well-defined clusters, and we can expect any clustering algorithm to have a hard time with this data.
+                    <hr>
+                  </p>
+                </div>
+        </div>
         <h1 class="custom"><b><i>Regression</i></b></h1>
         <p></p>
       </div>

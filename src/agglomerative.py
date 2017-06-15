@@ -4,7 +4,7 @@ import timeit
 
 import matplotlib.pyplot as plt
 
-from sklearn.cluster import AgglomerativeClustering,SpectralClustering,Birch,DBSCAN
+from sklearn.cluster import AgglomerativeClustering,SpectralClustering,Birch,DBSCAN,KMeans
 
 from sklearn.preprocessing import normalize
 from sklearn.metrics import silhouette_score,pairwise
@@ -14,15 +14,15 @@ def get_data(df,stats_list):
     '''
     Takes in final stats dataframe and stats list in format of the list seen in the main block below, outputs normalized data (X) - also outputs team column (tm) for future reattachment
     '''
-    df.set_index('player_year',inplace=True)
-    tm = df.pop('Tm_x')
+    X = df.set_index('player_year')
+    tm = X.pop('Tm_x')
 
-    df = df[stats_list]
+    X = X[stats_list]
 
     # one column (3Par) has a few nans - it makes sense to simply convert these to 0's
-    df.fillna(value=0,inplace=True)
+    X.fillna(value=0,inplace=True)
 
-    X = normalize(df)
+    # X = normalize(df)
     return X,tm
 
 def print_silhouette_scores(X,cluster_list,affinity_list,neighbors_list):
@@ -56,7 +56,7 @@ def plot_silhouette_scores(X,cluster_list):
 
 if __name__ == '__main__':
     # Initialization Options
-    stats_list = ['3PAr','FTr','AST%','STL%','BLK%','USG%','3P%','2P','2PA','3P','3PA','FT','ORB','ORB%','DRB','DRB%','AST','STL','BLK','dist','spd','tchs','pass','sast','ftast','dfgm','dfga']
+    new_stats_list = ['FG','FGA','2P','2PA','3P','3PA','FT','FTA','ORB','DRB','AST','STL','BLK','3PAr','FTr','ORB%','DRB%','AST%','STL%','BLK%','USG%','DRtg','DWS','DBPM','dist','spd','tchs','pass','sast','ftast','dfgm','dfga']
 
     df = pd.read_csv('../data/final_stats.csv')
     cluster_list = range(5,21)
@@ -67,12 +67,13 @@ if __name__ == '__main__':
     algorithm_list = ['auto','ball_tree','kd_tree','brute']
 
 
-    X,tm = get_data(df,stats_list)
+    X,tm = get_data(df,new_stats_list)
+    km = KMeans(n_clusters=13,max_iter=500,n_init=23,algorithm='full',precompute_distances=True,n_jobs=3,verbose=5)
     # print_silhouette_scores(X,stats_list,affinity_list,neighbors_list)
 
     # agglomerative optimizer
-    max_score_vector = (0,0,0,0)
-    agg_df = pd.DataFrame
+    # max_score_vector = (0,0,0,0)
+    # agg_df = pd.DataFrame
 
     # for n in neighbors_list:
     #     knn_graph = kneighbors_graph(X,n)
@@ -84,9 +85,9 @@ if __name__ == '__main__':
     #             if silhouette_score(X,model.labels_) > max_score_vector[2]:
     #                 max_score_vector = (k,n,a,silhouette_score(X,model.labels_))
 
-    # spectral optimizer
-    max_score_vector = (0,0,0,0)
-    spectral_df = pd.DataFrame(index=range(160),columns=['g','k'])
+    # # spectral optimizer
+    # max_score_vector = (0,0,0,0)
+    # spectral_df = pd.DataFrame(index=range(160),columns=['g','k'])
 
     # n = 0
     # for g in gamma_list:
@@ -116,20 +117,20 @@ if __name__ == '__main__':
     #         n += 1
 
     # DBSCAN optimizer
-    max_score_vector = (0,0,0)
-    n = 0
-    similarity = pairwise.cosine_similarity(X)
-    for epsilon in np.linspace(0.01,0.25,10):
-        for a in algorithm_list:
-            model = DBSCAN(eps=epsilon,algorithm=a,leaf_size=50,n_jobs=3,min_samples=10)
-            model.fit(similarity)
-            score = 0
-            try:
-                score = silhouette_score(X,model.labels_)
-            except ValueError:
-                pass
-            print ('{}|{}    |    {}'.format(epsilon,a,score))
-
-            if score > max_score_vector[2]:
-                max_score_vector = (t,k,score)
-            n += 1
+    # max_score_vector = (0,0,0)
+    # n = 0
+    # similarity = pairwise.cosine_similarity(X)
+    # for epsilon in np.linspace(0.01,0.25,10):
+    #     for a in algorithm_list:
+    #         model = DBSCAN(eps=epsilon,algorithm=a,leaf_size=50,n_jobs=3,min_samples=10)
+    #         model.fit(similarity)
+    #         score = 0
+    #         try:
+    #             score = silhouette_score(X,model.labels_)
+    #         except ValueError:
+    #             pass
+    #         print ('{}|{}    |    {}'.format(epsilon,a,score))
+    #
+    #         if score > max_score_vector[2]:
+    #             max_score_vector = (t,k,score)
+    #         n += 1
