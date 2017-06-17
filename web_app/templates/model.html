@@ -98,7 +98,65 @@
                 <div class="right">
                   <p class="custom">
                     t-distributed Stochastic Neighbor Embedding is a powerful manifold learning technique for visualizing higher-dimensional datasets via data embedding.  The goal here is to quickly, visually assess whether a feature space can be readily clustered, or whether, as seen here, the data seems to be evenly and randomly distributed.  This was my baseline effort, run on every feature in my dataset - I figured some feature selection was in order, and this hammered it home.  It's hard to discern any well-defined clusters, and we can expect any clustering algorithm to have a hard time with this data.
+                  </p>
+                </div>
+        </div>
+        <div class="clear">
+          <hr>
+                <div class="left">
+                  <p class="custom">
+                    With the above in mind, my immediate concern was to perform meaningful feature selection with two goals in mind:<br>
+                    &emsp;a) create feature space with meaningful, separable clusters<br>
+                    &emsp;b) be able to make qualitative observations on these clusters, meaningful from a basketball standpoint.
                     <hr>
+                  </p>
+                  <hr>
+                </div>
+        </div>
+        <hr>
+        <div>
+                <img class="left" src="../static/img/2dtsne_hope.png"/>
+                <div class="right">
+                  <p class="custom">
+                    <br><br>
+                    My next effort involved simple manual feature selection - I removed features which I knew to be collinear (eg; 3P%, when 3P and 3PA are already features),features related to relatively rare events in a game (eg; PF), and features that wouldn't discriminate between clusters (eg; TOV).  Here I saw a glimmer of hope (and clusters!), but was far from satisfied.
+                  </p>
+                </div>
+        </div>
+        <br><br><br>
+        <div class="clear">
+                <img class="left" src="../static/img/2dtsne_new_feature_space.png"/>
+                <div class="right">
+                  <p class="custom">
+                    <br><br>
+                    I proceeded to write a script that would randomize a subset of my original feature space, run the t-SNE algorithm on the subset, run a clustering algorithm on the resulting embedding vectors, and return the resulting silhouette score.  I ran this through a loop 500 times, and wrote the feature space associated with the highest silhouette score to a list for storage and further use.  The TSNE plot seen here is the representation of this feature space.
+                  </p>
+                </div>
+        </div>
+        <div class="clear">
+          <hr>
+                <div class="clear">
+                  <p class="custom">
+                    I had yet to see how these clusters would look to basketball-fan, non-data scientist me, but these results were obviously encouraging!  The data still looked a bit "blobby", and with a couple outliers here and there, but undeniably contained well-defined, well-clumped clusters.
+                    <hr>
+                  </p>
+                  <p class="custom">
+                    This method reduced my space from 53 features originally, to a mere 13, to wit:
+                  <ul>
+                    <li>DRtg - Defensive Rating, an estimate of points given up per 100 possessions</li>
+                    <li>eFG% - Effective Field Goal Percentage, a metric that takes into account the fact that 3-pointers are worth 150% more than 2-pointers</li>
+                    <li>Pass - Total passes, per game</li>
+                    <li>FT% - Free Throw Percentage</li>
+                    <li>Tchs - Total touches, per game</li>
+                    <li>3PA - 3 Point Attempts, per 36 minutes</li>
+                    <li>STL - Steals, per 36 minutes</li>
+                    <li>Dfgm - Defensive Field Goals Allowed, per game, within 6 feet of basket</li>
+                    <li>3PAr - 3 Point Attempt Rate, 3 pointers attempted per field goal attempt</li>
+                    <li>TRB - Total Rebounds, per 36 minutes</li>
+                    <li>BLK - Blocks, per 36 minutes</li>
+                    <li>OBPM - Offensive Box Plus-Minus, an ensemble metric meant to evaluate a player's entire offensive contribution</li>
+                    <li>FT - Free Throws Made, per 36 minutes</li>
+                  </ul>
                   </p>
                 </div>
         </div>

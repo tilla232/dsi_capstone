@@ -22,7 +22,7 @@ def get_data(df,stats_list):
     # one column (3Par) has a few nans - it makes sense to simply convert these to 0's
     X.fillna(value=0,inplace=True)
 
-    # X = normalize(df)
+    X = normalize(X)
     return X,tm
 
 def print_silhouette_scores(X,cluster_list,affinity_list,neighbors_list):

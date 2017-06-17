@@ -6,7 +6,7 @@ import numpy as np
 
 url = 'http://api.probasketballapi.com/sportsvu/player'
 api_key = os.environ['PRO_BASKETBALL_API_KEY']
-stats = ['dist','spd','tchs','pass','sast','ftast','dfgm','dfga','rimd']
+stats = ['cfga','cfgm','dist','spd','tchs','pass','sast','ftast','dfgm','dfga','rimd']
 
 def request(season,player_id):
     query = {'api_key':api_key,'player_id':player_id}
