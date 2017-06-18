@@ -15,13 +15,26 @@ figure figcaption {
 h1.custom {
   text-align: center;
   clear:both;
+  color: #000000;
+}
+h2.custom {
+  text-align: center;
+  clear:both;
 }
 p.custom {
   font-family: 'Helvetica';
   font-size: 8;
+  border: 2;
 }
 p.right {
   text-align: right;
+}
+p.caption {
+  text-align:center;
+  font-family: 'Arial';
+  font-size: 6;
+  padding: 0;
+  margin: 0;
 }
 div.left {
   clear: left;
@@ -45,4 +58,14 @@ img.left {
   border:1px solid #328CC1;
   background-color:#1D2731;
   margin:2px;
+}
+img.row {
+  display: inline-block;
+  margin-right:5px;
+  border:1px solid #ccc;
+  text-align: center;
+}
+a.category {
+  text-decoration: underline;
+  font-weight: bold;
 }

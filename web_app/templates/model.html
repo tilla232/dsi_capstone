@@ -71,9 +71,15 @@
       <div class="jumbotron">
         <p>
           <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View Player Positions &raquo;</a>
-
+          <hr>
         </p>
-        <h1 class="custom"><b><i>Data</i></b></h1>
+        <a class="category" href="#unspecified">K Unspecified:<br></a>
+        <a href="#affinity">Affinity Propagation</a>|<a href="#dbscan">DBSCAN</a>|<a href="#meanshift">Mean-shift</a>
+        <br>
+        <a class="category" href="#specified">K specified:<br></a>
+        <a href="#kmeans">K-Means</a>|<a href="#gaussian">Gaussian Mixture Model</a>|<a href="#spectral">Spectral</a>|<a href="#agglomerative">Agglomerative</a>|<a href="#ward">Ward Hierarchical</a>|<a href="birch">BIRCH</a>
+
+        <h1 class="custom"><b><u>Data</u></b></h1>
         <div>
                 <img class="right" src="../static/img/bbrefsquare.png"/>
                 <div class="left">
@@ -92,7 +98,6 @@
                   </p>
                 </div>
         </div>
-        <h1 class="custom"><b><i>Clustering</i></b></h1>
         <div>
                 <img class="left" src="../static/img/2dtsne.png"/>
                 <div class="right">
@@ -158,6 +163,97 @@
                     <li>FT - Free Throws Made, per 36 minutes</li>
                   </ul>
                   </p>
+                  <p class="custom">
+                    It quickly occurred to me that, surely, there are many such feature spaces containing equally-well clustered data.  I ran the feature space randomizer an additional 4 times, producing the following data:<br>
+                    &emsp;&emsp;&emsp;&emsp;
+                    <img class="row" src="../static/img/2dtsne_feature_space_1.png">
+                    <img class="row" src="../static/img/2dtsne_feature_space_2.png">
+                  </p>
+                  <p class="custom">
+                    &emsp;&emsp;&emsp;&emsp;
+                    <img class="row" src="../static/img/2dtsne_feature_space_3.png">
+                    <img class="row" src="../static/img/2dtsne_feature_space_4.png">
+                  </p>
+                  <p class="caption">So many clusters!</p>
+                  <p class="custom">
+                    In light of this information, I set out to discern a pattern from these 4 spaces, in hopes of crafting the set of features that I would ultimately use in my clustering.  After much experimentation, I decided to test the viability of these feature spaces by introducing a very human condition: any model that didn't cluster Nikola Jokic's and Marc Gasol's 2016-17 seasons together would be thrown out.  I had reservations about imposing such a condition on my model - surely this flies in the exploratory nature of unsupervised learning?  Ultimately, I concluded that these algorithms needed such direction, as it would constitute evidence that the model was clustering in a meaningful way - ie; that the data from the feature space was providing a picture of a player's style, as opposed to other qualitative data about him, which I was not trying to capture.
+                  </p>
+                  <a name="unspecified"><h1 class="custom"><b><u>K-unspecified Clustering</u></b></h1></a>
+                  <a name="affinity"><h2 class="custom"><b><i>Affinity Propagation</i></b></h2></a>
+                  <p class="custom">
+                    After setting this 'Jokic' condition, I set to exploring a number of algorithms that don't require a number of clusters as an input, starting with affinity propagation.  Affinity propagation functions by 'message passing' between points, in which the model iteratively selects points as 'exemplars' for other points, until determining that all points are adequately represented by their nearest exemplar.  The main limiting factor with the algorithm is its computational cost, which hardly intimidated me and my 911-record dataset.
+                  </p>
+                  <hr>
+                  <div class="clear">
+                          <img class="left" src="../static/img/affinity_snippet.png"/>
+                          <div class="clear">
+                            <p class="custom">
+                              Iterative model analysis -
+                              The extreme preference value accounts for another of affinity propagation's issues: it tends to over-cluster, so we set preference accordingly to mitigate the issue.
+                            </p>
+                            <p class="custom">
+                              Affinity propagation performed admirably on each of the feature spaces, but with each, it highlighted certain challenges of the algorithm, and indeed, of my problem itself.  Any reduction in bias - that is to say, an increase to silhouette scores - would necessarily require a fairly intense reduction to the dimension of my feature space.  The underlying issue with this requirement was that such a drastic culling almost always resulted in clusters that were hard to explain from a basketball standpoint.  It was a constant balancing act to favor what the data said, versus what my watching experience told me.<br><br>
+
+                              All that said, affinity propagation handled feature space 1 very well, and it appeared, to my eye, to have only a couple of issues. First, the lack of a feature that took rebounding into account; Evan Turner, for example, snuck his way into a "big man playmaker" cluster, when a rebounding feature likely would've prevented such an inclusion. The next issue was one that, ultimately, I feared would pervade any model or parameterization I settled on, namely: it had a very hard time quantifying and clustering on defensive value.  Players like Andrew Bogut were being grouped with players like Greg Monroe and Julius Randle, when the former has (in recent years) been a defensive stalwart, while the latter are comparably ineffective on the defensive end. I made a note to make a serious effort to balance offensive metrics with defensive ones when finalizing my feature space.<br><br>
+                              While keeping in the back of my mind that affinity propagation could work very well if I presented it with the proper feature space, I forged on to explore other algorithms.
+                            </p>
+                          </div>
+                  </div>
+                  <hr>
+                  <a name="dbscan"><h2 class="custom"><b><i>DBSCAN</i></b></h2></a>
+                  <p class="custom"> DBSCAN is an algorithm built to robustly handle noise, and clusters of varying shapes.  Like affinity propagation, it carries the distinction of not needing to know how many clusters the user is looking for.  While these are desirable traits, it also carries a number of severely limiting disadvantages, like its inability to handle higher-dimensional data, as well as clusters of varying density, as it only functions on the one epsilon value provided at initiation - both of these proved to be insurmountable problems in my study.
+                    <img class="left" src="../static/img/affinity_snippet.png"/>
+                    <div class="clear">
+                      <p class="custom">
+                      More iterative clustering - The epsilon parameter defines the acceptable neighborhood size for a sample, so, not surprisingly, varying it like this wildly changes the number of clusters the algorithm will produce.  After running this on each subspace, I got a good idea of the epsilon range that would produce models containing between ~5 and ~20 clusters, for each subspace.  After doing so, I tried to optimize a bit more by comparing silhouette scores at different values of epsilon for each space - when every score came up negative, I figured I had to dig in a little more to see what was going on.<br>
+                      I ran the algorithm with 'optimal' parameters on the subspace that had performed the best - fs2 - and checked the distribution of cluster labels over my data:
+                    </p>
+                    <div>
+                            <img class="left" src="../static/img/dbscan_noise.png"/>
+                            <div class="right">
+                              <p class="custom">
+                                <br><br>
+                                Here was the culprit!  DBSCAN found 781 of my 911 records too noisy to cluster, and so labeled them -1...if this was happening over my seriously reduced subspaces, the algorithm surely wouldn't be able to handle my final feature space...
+                              </p>
+                            </div>
+                    </div>
+                    </div>
+                    <a name="meanshift"><h2 class="custom"><b><i>Mean-shift</i></b></h2></a>
+                    <p class="custom">Like DBSCAN, Mean-shift is a density-based algorithm that doesn't require a number of clusters be specified.
+                    </p>
+                    <div>
+                            <img class="left" src="../static/img/meanshift_snippet.png"/><br>
+                          </div>
+                          <div class="clear">
+                            <img class="left" src="../static/img/silhouette_error.png"/>
+                            <div class="right">
+                              <p class="custom">
+                                Discussion about how meanshift utterly failed me :(
+                              </p>
+                            </div>
+                          </div>
+                    </div>
+
+                    <a name="specified"><h1 class="custom">K-Specified Algorithms</h1></a>
+
+                    <a name="kmeans"><h2 class="custom"><b><i>K-Means</i></b></h2></a>
+                    <p class="custom">Like DBSCAN, Mean-shift is a density-based algorithm that doesn't require a number of clusters be specified.
+                    </p>
+                    <a name="gaussian"><h2 class="custom"><b><i>Gaussian Mixture Model</i></b></h2></a>
+                    <p class="custom">Like DBSCAN, Mean-shift is a density-based algorithm that doesn't require a number of clusters be specified.
+                    </p>
+                    <a name="spectral"><h2 class="custom"><b><i>Spectral Clustering</i></b></h2></a>
+                    <p class="custom">Like DBSCAN, Mean-shift is a density-based algorithm that doesn't require a number of clusters be specified.
+                    </p>
+                    <a name="agglomerative"><h2 class="custom"><b><i>Agglomerative Clustering</i></b></h2></a>
+                    <p class="custom">Like DBSCAN, Mean-shift is a density-based algorithm that doesn't require a number of clusters be specified.
+                    </p>
+                    <a name="ward"><h2 class="custom"><b><i>Ward Hierarchical</i></b></h2></a>
+                    <p class="custom">Like DBSCAN, Mean-shift is a density-based algorithm that doesn't require a number of clusters be specified.
+                    </p>
+                    <a name="birch"><h2 class="custom"><b><i>BIRCH</i></b></h2></a>
+                    <p class="custom">Like DBSCAN, Mean-shift is a density-based algorithm that doesn't require a number of clusters be specified.
+                    </p>
                 </div>
         </div>
         <h1 class="custom"><b><i>Regression</i></b></h1>
