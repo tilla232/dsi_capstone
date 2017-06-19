@@ -237,11 +237,75 @@
                     <a name="specified"><h1 class="custom">K-Specified Algorithms</h1></a>
 
                     <a name="kmeans"><h2 class="custom"><b><i>K-Means</i></b></h2></a>
-                    <p class="custom">Like DBSCAN, Mean-shift is a density-based algorithm that doesn't require a number of clusters be specified.
+                    <p class="custom">K-Means is a popular, very commonly-used algorithm, in part due to its ease in implementation.  The algorithm thrives in situations where clusters are spherical, cluster size is balanced, and cluster density is relatively uniform.  This was problematic, as none of those descriptors could be applied to my data.  Though the algorithm was still very much worth exploring - especially as a means to hone in on an ideal value of k for the other guided algorithms - I was not expecting any noteworthy results.
                     </p>
+                    <img class="left" src="../static/img/k_optimization.png"/>
+                    <div class="clear">
+                      <p class="custom">
+                        I used this script in an attempt to use the 'elbow method' to determine a suitable number of clusters.  The method involves visually assessing the point of diminishing return in terms of error reduction upon increasing number of clusters.  I also introduced a new metric for consideration; the Calinski-Harabasz index is based on both inter- and intra-cluster sum of squares measures.<sup> Here are the charts produced for each metric after 100 iterations:
+                      </p>
+                      &emsp;&nbsp;
+                      <img class="row" src="../static/img/errorelbow_kmeans.png"/>
+                      <img class="row" src="../static/img/silhouetteelbow_kmeans.png"/>
+                      <img class="row" src="../static/img/calinskielbow_kmeans.png"/>
+                      <div class="clear">
+                        <p class="custom">
+                          Immediately here we can see the deficiencies of K-Means show up - our error is <i>increasing</i> despite our adding more clusters, something which should not happen if the algorithm has the means to cluster the data properly.<br>
+                          This is a great segue to another important concept in K-Means: PCA.  In a sense, PCA can almost be thought of as a generalized K-means algorithm - both methods seek to minimalize mean-squared reconstruction error in representing data as vectors in a smaller dimension.  The relationship between unsupervised dimension reduction and unsupervised learning isn't yet fully understood, but PCA is largely accepted as an effective "relaxation" of K-means, and thus useful as a step in preprocessing.
+                          <br><br>
+                          I ran the same script, but processed the data with PCA before fitting it with K-means.  Here are those results:
+                        </div>
+                        </p>
+                        &emsp;&nbsp;
+                        <img class="row" src="../static/img/errorelbow_pca.png"/>
+                        <img class="row" src="../static/img/silhouetteelbow_pca.png"/>
+                        <img class="row" src="../static/img/calinskielbow_pca.png"/>
+                        <br>
+                        <div class="clear">
+                          <p class="custom">
+                            While it was still clear K-means likely wouldn't get the job done, it was reassuring to see some sort of pattern emerge around the k=[10,15] range.
+                          </p>
+                          </div>
                     <a name="gaussian"><h2 class="custom"><b><i>Gaussian Mixture Model</i></b></h2></a>
-                    <p class="custom">Like DBSCAN, Mean-shift is a density-based algorithm that doesn't require a number of clusters be specified.
+                    <p class="custom">The Gaussian Mixture Model views the dataset as a mixture of Gaussian distributions, and can be understood as the generalized case of K-means - it's generalized in the sense that it takes into account the <i>covariance</i> of the data as well, which, functionally, means the model can take different cluster shapes into account.  Here are the elbow plots from running PCA-initialized data through GMM:
                     </p>
+                      &emsp;&nbsp;
+                      <img class="row" src="../static/img/error_gmm.png"/>
+                      <img class="row" src="../static/img/silhouette_gmm.png"/>
+                      <img class="row" src="../static/img/calinski_gmm.png"/>
+                      <br>
+                      <div class="clear">
+                        <p class="custom">
+                          These looked somewhat promising! After the artificially inflated values in k=[5,10], we see peaks in both score metrics around k=14 or k=15.  I checked to see if the other feature spaces - 1,3 and 4 - would produce similar plots:
+                        </p>
+                      </div>
+                    &emsp;&nbsp;
+                    <img class="row" src="../static/img/errorgmm_fs1.png"/>
+                    <img class="row" src="../static/img/silhouettegmm_fs1.png"/>
+                    <img class="row" src="../static/img/calinskigmm_fs1.png"/>
+                    <br>
+                    &emsp;&nbsp;
+                    <img class="row" src="../static/img/errorgmm_fs3.png"/>
+                    <img class="row" src="../static/img/silhouettegmm_fs3.png"/>
+                    <img class="row" src="../static/img/calinskigmm_fs3.png"/>
+                    <br>
+                    &emsp;&nbsp;
+                    <img class="row" src="../static/img/errorgmm_fs4.png"/>
+                    <img class="row" src="../static/img/silhouettegmm_fs4.png"/>
+                    <img class="row" src="../static/img/calinskigmm_fs4.png"/>
+                    <br>
+                    <div class="clear">
+                      <p class="custom">
+                        There were a couple takeaways here:
+                        <ul>
+                          <li>1. The Calinski-Harabasz scores for spaces 1 and 3 are both intriguing - they both have clear maximums, and both models appear to be clustering the way they should be.</li>
+
+                          <li>2. All of these models are producing error plots with an elbow around k=[10,15]</li>
+                        </ul>
+
+                      </p>
+                    </div>
+
                     <a name="spectral"><h2 class="custom"><b><i>Spectral Clustering</i></b></h2></a>
                     <p class="custom">Like DBSCAN, Mean-shift is a density-based algorithm that doesn't require a number of clusters be specified.
                     </p>
