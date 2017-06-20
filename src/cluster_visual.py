@@ -99,23 +99,23 @@ if __name__=='__main__':
     # plot_tsne_scatter(X,filename='reduced2')
 
     # Let's randomize our feature space, and check the silhouette score when we cluster on the resulting TSNE embedding vectors!
-    n = 0
-    feature_space_dict = {}
-    for i in range(4):
-        potential_features = []
-        max_vect = ([],0)
-        for _ in range(500):
-            new_stats = randomize_feature_space(stats_list)
-            X, _ = get_data(df,new_stats)
-            score = tsne_silhouette_score(X,mod='KMeans')
-            potential_features.append((new_stats,score))
-            if n % 25 == 0:
-                print n
-            n += 1
-
-        potential_features.sort(key=lambda x: x[1])
-        print potential_features[-1]
-        feature_space_dict[i] = potential_features[-1]
+    # n = 0
+    # feature_space_dict = {}
+    # for i in range(4):
+    #     potential_features = []
+    #     max_vect = ([],0)
+    #     for _ in range(500):
+    #         new_stats = randomize_feature_space(stats_list)
+    #         X, _ = get_data(df,new_stats)
+    #         score = tsne_silhouette_score(X,mod='KMeans')
+    #         potential_features.append((new_stats,score))
+    #         if n % 25 == 0:
+    #             print n
+    #         n += 1
+    #
+    #     potential_features.sort(key=lambda x: x[1])
+    #     print potential_features[-1]
+    #     feature_space_dict[i] = potential_features[-1]
 
     # The best we did here with 20 iterations was a silhouette score around .45, let's try to do better! Set it to 500 iterations, and go for a coffee break...
     # Not much better, .45ish appears to be our peak...let's try some unsupervised clustering instead (KMeans -> Affinity Propagation)!
